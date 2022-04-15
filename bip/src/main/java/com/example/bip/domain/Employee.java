@@ -2,7 +2,6 @@ package com.example.bip.domain;
 
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name="employee")
@@ -26,7 +25,7 @@ public class Employee {
     private String office;
 
     @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "empluserID", referencedColumnName = "userID")
+    @JoinColumn(name = "empluserID", referencedColumnName = "userid")
     private User user;
 
     public Employee(){}

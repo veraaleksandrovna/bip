@@ -9,7 +9,7 @@ import java.util.Set;
 public class User  {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
-   @Column (name= "userID", nullable = false)
+   @Column (name= "userid", nullable = false)
    private Long userID;
 
    @Column(name="login", nullable = false)
@@ -18,9 +18,9 @@ public class User  {
    private String password;
    @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(name = "user_role",
-           joinColumns = @JoinColumn(name = "userID"),
+           joinColumns = @JoinColumn(name = "user_id"),
            inverseJoinColumns = @JoinColumn(name = "role_id"))
-   private Set<Role> roles = new HashSet<>();
+   private Set<Role> role = new HashSet<>();
 
    public User() {
    }
@@ -49,11 +49,12 @@ public class User  {
       this.password = password;
    }
 
-   public Integer getRole() {
+   public Set<Role> getRole() {
       return role;
    }
 
-   public void setRole(Integer role) {
+   public void setRole(Set<Role> role) {
       this.role = role;
    }
+
 }
