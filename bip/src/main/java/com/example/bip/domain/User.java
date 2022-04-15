@@ -1,8 +1,6 @@
 package com.example.bip.domain;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name="user")
@@ -16,11 +14,10 @@ public class User  {
    private String login;
    @Column(name="password", nullable = false)
    private String password;
-   @ManyToMany(fetch = FetchType.LAZY)
-   @JoinTable(name = "user_role",
-           joinColumns = @JoinColumn(name = "user_id"),
-           inverseJoinColumns = @JoinColumn(name = "role_id"))
-   private Set<Role> role = new HashSet<>();
+   @Enumerated(EnumType.STRING)
+   @Column(name = "role")
+   private UserRole role;
+
 
    public User() {
    }
@@ -49,11 +46,13 @@ public class User  {
       this.password = password;
    }
 
-   public Set<Role> getRole() {
-      return role;
+   public void setRole(UserRole role) {
+      this.role = role;
    }
 
-   public void setRole(Set<Role> role) {
+   public User(String login, String password, UserRole role) {
+      this.login = login;
+      this.password = password;
       this.role = role;
    }
 
